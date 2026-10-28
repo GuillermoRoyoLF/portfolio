@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guillermo Royo López-Fando · Portfolio</title>
+<meta name="description" content="Engineering project portfolio of Guillermo Royo López-Fando, aerospace engineer.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: one reading column under an engineering-drawing title block; each project is a "sheet" with its own header row and a stamp of what was done. */
+:root {
+  --paper: #F3F5F7;
+  --ink: #17202A;
+  --muted: #5B6672;
+  --rule: #C7CFD8;
+  --accent: #1E54B8;
+  --plate: #FFFFFF;
+  --plate-ink: #17202A;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #10161D; --ink: #E4E9EE; --muted: #9AA5B1; --rule: #2B3542;
+    --accent: #8CAEFF; --plate: #F3F5F7; --plate-ink: #17202A; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #10161D; --ink: #E4E9EE; --muted: #9AA5B1; --rule: #2B3542;
+  --accent: #8CAEFF; --plate: #F3F5F7; --plate-ink: #17202A; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 2.5rem 3rem;
+}
+.wrap { max-width: 46rem; margin: 0 auto; display: grid; gap: 2.75rem; }
+a { color: var(--accent); text-underline-offset: 0.18em; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Title block */
+.titleblock {
+  border: 1.5px solid var(--ink);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.tb-name { padding: 1.1rem 1.2rem 1rem; border-bottom: 1px solid var(--ink); }
+.tb-name h1 {
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(2rem, 6vw, 2.75rem);
+  line-height: 1.05; margin: 0; letter-spacing: 0.01em; text-wrap: balance;
+}
+.tb-name p { margin: 0.35rem 0 0; color: var(--muted); font-size: 1rem; }
+.tb-cells { display: grid; grid-template-columns: 1fr 1fr; }
+.tb-cell { padding: 0.55rem 1.2rem 0.65rem; border-top: 1px solid var(--rule); min-width: 0; }
+.tb-cell:nth-child(odd) { border-right: 1px solid var(--rule); }
+.tb-cell:nth-child(-n+2) { border-top: 0; }
+.label {
+  font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--muted); display: block;
+}
+.tb-cell .value { font-family: var(--font-mono); font-size: 0.86rem; overflow-wrap: break-word; user-select: all; }
+.tb-cell .value a { user-select: auto; }
+
+.intro { font-style: italic; color: var(--muted); margin: 0; }
+
+/* Index */
+.index { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.index li { border-bottom: 1px solid var(--rule); }
+.index a {
+  display: grid; grid-template-columns: 2.2rem 1fr auto; gap: 0.75rem; align-items: baseline;
+  padding: 0.6rem 0; text-decoration: none; color: var(--ink);
+}
+.index a:hover .ix-title { color: var(--accent); }
+.ix-no { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ix-title { font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; line-height: 1.2; min-width: 0; }
+.ix-org { display: block; font-family: var(--font-body); font-weight: 400; font-size: 0.9rem; color: var(--muted); }
+.ix-stamp { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); text-align: right; }
+
+/* Project sheets */
+.sheet { display: grid; gap: 1rem; scroll-margin-top: 1rem; }
+.sheet-head { border-top: 1.5px solid var(--ink); padding-top: 0.75rem; display: grid; gap: 0.35rem; }
+.sheet-head .no { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.09em; color: var(--muted); text-transform: uppercase; }
+.sheet h2 {
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 4.5vw, 2.05rem);
+  line-height: 1.1; margin: 0; text-wrap: balance;
+}
+.meta { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-size: 0.95rem; }
+.meta .org { font-weight: 600; }
+.meta .dates { font-family: var(--font-mono); font-size: 0.84rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rolebar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.4rem 1rem; align-items: baseline; }
+.role { font-style: italic; color: var(--muted); font-size: 0.95rem; }
+.stamp {
+  font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); border: 1px solid var(--accent); padding: 0.12rem 0.45rem;
+}
+.sheet p { margin: 0; max-width: 65ch; }
+.sub { font-family: var(--font-display); font-weight: 600; font-size: 1.15rem; letter-spacing: 0.02em; margin: 0.4rem 0 0; }
+.contrib { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.7rem; max-width: 65ch; }
+.contrib li { padding-left: 1rem; border-left: 2px solid var(--rule); }
+.contrib b { font-weight: 600; }
+.note { font-size: 0.86rem; color: var(--muted); }
+sub { font-size: 0.72em; }
+
+/* Figures */
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.25rem; margin: 0.25rem 0 0; }
+figure { margin: 0; display: grid; gap: 0.45rem; align-content: start; min-width: 0; }
+figure .plate { background: var(--plate); border: 1px solid var(--rule); padding: 0.5rem; }
+figure img { display: block; width: 100%; height: auto; max-width: 100%; }
+figcaption { font-size: 0.84rem; color: var(--muted); line-height: 1.45; }
+figcaption .fig { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); margin-right: 0.35rem; }
+figure.full { grid-column: 1 / -1; }
+figure.narrow { justify-self: center; width: 100%; max-width: 36rem; }
+
+/* Manufacturing drawing: zoomable inside its own scroll box */
+.drawing .plate { overflow: auto; max-height: 80vh; }
+.drawing.zoomed .plate img { width: 250%; max-width: none; }
+.zoom-btn {
+  justify-self: start; font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); background: transparent; border: 1px solid var(--accent); padding: 0.3rem 0.6rem; cursor: pointer;
+}
+.zoom-btn:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.zoom-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+footer { border-top: 1px solid var(--rule); padding-top: 0.8rem; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); letter-spacing: 0.04em; }
+
+@media (max-width: 30rem) {
+  .tb-cells { grid-template-columns: 1fr; }
+  .tb-cell:nth-child(odd) { border-right: 0; }
+  .tb-cell:nth-child(2) { border-top: 1px solid var(--rule); }
+  .index a { grid-template-columns: 1.8rem 1fr; }
+  .ix-stamp { grid-column: 2; text-align: left; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <header class="titleblock" aria-label="Contact details">
+    <div class="tb-name">
+      <h1>Guillermo Royo López-Fando</h1>
+      <p>Project Portfolio · Designed, Built and Tested</p>
+    </div>
+    <div class="tb-cells">
+      <div class="tb-cell"><span class="label">Based in</span><span class="value">Madrid, Spain</span></div>
+      <div class="tb-cell"><span class="label">Phone</span><span class="value">+44 20 4577 3649</span></div>
+      <div class="tb-cell"><span class="label">Email</span><span class="value">guille.aeroing@gmail.com</span></div>
+      <div class="tb-cell"><span class="label">LinkedIn</span><span class="value"><a href="https://www.linkedin.com/in/guillermoroyolf" target="_blank" rel="noopener">linkedin.com/in/guillermoroyolf</a></span></div>
+    </div>
+  </header>
+
+  <section aria-label="Projects" style="display:grid;gap:1rem">
+    <p class="intro">Five projects, each showing what I designed, built or tested and my own contribution within the team.</p>
+    <ol class="index">
+      <li><a href="#compressor"><span class="ix-no">01</span><span class="ix-title">Multistage Axial Compressor<span class="ix-org">UC3M · Sep 2025 – Dec 2025</span></span><span class="ix-stamp">Designed</span></a></li>
+      <li><a href="#valve"><span class="ix-no">02</span><span class="ix-title">Fuel Main Check Valve for a Kerolox Rocket Engine<span class="ix-org">Yellow Jacket Space Program, Georgia Tech · Oct 2024 – Apr 2025</span></span><span class="ix-stamp">Integrated · Tested · Designed</span></a></li>
+      <li><a href="#wing"><span class="ix-no">03</span><span class="ix-title">Flow Control Wing for UAV Applications<span class="ix-org">INTA, Madrid · Oct 2025 – Jun 2026</span></span><span class="ix-stamp">Designed · Built · Tested</span></a></li>
+      <li><a href="#jet"><span class="ix-no">04</span><span class="ix-title">Business Jet Conceptual and Preliminary Design<span class="ix-org">Georgia Tech · Jan 2025 – Apr 2025</span></span><span class="ix-stamp">Designed</span></a></li>
+      <li><a href="#sloshing"><span class="ix-no">05</span><span class="ix-title">Propellant Sloshing in Rocket Tanks<span class="ix-org">LGST Lab, Georgia Tech · Jan 2025 – May 2025</span></span><span class="ix-stamp">Tested</span></a></li>
+    </ol>
+  </section>
+
+  <!-- 1 -->
+  <article class="sheet" id="compressor">
+    <div class="sheet-head">
+      <span class="no">Project 01</span>
+      <h2>Multistage Axial Compressor</h2>
+      <div class="meta"><span class="org">Universidad Carlos III de Madrid (UC3M)</span><span class="dates">Sep 2025 – Dec 2025</span></div>
+      <div class="rolebar"><span class="role">Team lead · team of four, course project</span><span class="stamp">Designed</span></div>
+    </div>
+    <p>Design of an 11-stage intermediate pressure compressor for a commercial turbofan, turning at 8000&#8239;rpm within a 0.5&#8239;m tip radius. From 150&#8239;kg/s at 1.2&#8239;bar and 310&#8239;K, it reaches a 9.2 pressure ratio at 88.9% polytropic efficiency.</p>
+    <p>The mean radius drove the design, since it sets both the blade speed and the annulus height. I built the Smith chart in MATLAB, sweeping 161&#8239;×&#8239;161 combinations of flow and loading coefficient with Howell–Lieblein losses and keeping only the points within the Mach, deflection and de Haller limits. Repeating it for mean radii between 0.26 and 0.30&#8239;m, I placed the design point at 0.293&#8239;m, where the tip radius limit meets the aerodynamic limits and the stage loading is highest: 10.6 stages, rounded up to 11 for margin on every limit.</p>
+    <p>The first stage was turned into circular arc blade sections and run in MISES, a 2D viscous cascade solver: both rows turned the flow within 1.3° of the design exit angle with attached boundary layers, and incidence sweeps of about ±10° mapped their loss buckets. Extending the blades to hub and tip with a free vortex showed the weak point: the front annulus is so tall, with a hub to tip ratio of about 0.17, that the stator hub Mach number reaches 1.69, so a second iteration would raise the hub radius of the front stages.</p>
+    <p>As team lead I divided the work, handled each submission and discussed the challenges with the professor, and I was directly responsible for the Smith chart and the whole analysis of the MISES results.</p>
+    <div class="figs">
+      <figure class="full narrow">
+        <div class="plate"><img src="img/comp_smith.jpg" alt="Smith chart with efficiency contours, design limits, tip radius line and the selected design point" width="1393" height="1129" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 1</span>Smith chart at a mean radius of 0.293&#8239;m: efficiency contours, design limits, tip radius line and the selected design point.</figcaption>
+      </figure>
+      <figure class="full">
+        <div class="plate"><img src="img/comp_stator.jpg" alt="Stator blade sections at hub and tip" width="2011" height="782" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 2</span>Stator blade sections at hub and tip, with solidity σ, camber θ and stagger ξ.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate"><img src="img/comp_annulus.png" alt="Hub, mean and tip radii along the 11 compressor stages" width="858" height="546" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 3</span>Hub, mean and tip radii along the 11 stages, with the annulus contracting towards the rear.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate"><img src="img/comp_lossbucket.png" alt="Stator loss coefficients, exit flow angle and deviation against incidence" width="587" height="488" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 4</span>Stator loss coefficients, exit flow angle and deviation against incidence, from the MISES sweeps. Losses stay flat at negative incidence and rise once it turns positive, as the suction side boundary layer separates; the peak at +2 to +3° is most likely MISES struggling to converge near separation.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 2 -->
+  <article class="sheet" id="valve">
+    <div class="sheet-head">
+      <span class="no">Project 02</span>
+      <h2>Fuel Main Check Valve for a Kerolox Rocket Engine</h2>
+      <div class="meta"><span class="org">Yellow Jacket Space Program (Vespula engine), Georgia Tech, Atlanta</span><span class="dates">Oct 2024 – Apr 2025</span></div>
+      <div class="rolebar"><span class="role">Propulsion Engineer · fluid systems subteam</span><span class="stamp">Integrated · Tested · Designed</span></div>
+    </div>
+    <p>I joined the fluid systems subteam of the propulsion team. I spent my first two months getting to know the team: I helped integrate the kerolox sleeve valve used as the main fuel valve and run its cold flow test. In December I was given the design of the new fuel and oxygen main check valves (FMV and OMV), from scratch to prototype.</p>
+    <h3 class="sub">My contribution</h3>
+    <ul class="contrib">
+      <li><b>Concept:</b> I presented the Conceptual Design Review with a Pugh matrix and a first sketch. After the team's feedback, I simplified the geometry so it would be easier to machine.</li>
+      <li><b>Preliminary design:</b> From February, I did all the PDR calculations in Excel: force balance, spring iterations, pressure drop (Darcy–Weisbach and local losses), material choice, stress analysis including Hertzian contact, orifice plate FEA in Abaqus, sealing, bolt and washer sizing, and the bill of materials; I also talked to spring suppliers about custom springs. I chose a Vespel seat, a polymer that works at cryogenic temperatures, so that both valves could use the same seat material.</li>
+      <li><b>Handover:</b> I had to stop at the PDR to finish an undergraduate research project, so I walked the student who took over through our reasoning, the next steps and the calculations. Still open were the seal and seat FEA, a CFD of the pressure drop, the tolerance stack-up and the manufacturing drawings.</li>
+    </ul>
+    <h3 class="sub">Status and what I learned</h3>
+    <p>The last I heard, about six months ago, the valve had reached its Manufacturing Readiness Review. Vespula flew in April 2026 to a collegiate record of 56,590 feet, and I do not know whether it flew with the new valves or with the previous ones. The project taught me to work to deadlines, to accept that a design needs several iterations before it can be made, and to lean on the people around me, who know a lot and are happy to help.</p>
+    <div class="figs">
+      <figure class="full">
+        <div class="plate"><img src="img/valve_section2.jpeg" alt="CAD cross section of the fuel main check valve" width="1600" height="873" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 5</span>CAD cross section of the fuel main check valve: body, poppet and spring (not the final version*).</figcaption>
+      </figure>
+    </div>
+    <p class="note">*The final CAD and the Abaqus FEA of the orifice plate were in the PDR presentation, and I did not keep a copy of it. Since leaving the team I no longer have access to my files on the GT Vault SharePoint.</p>
+  </article>
+
+  <!-- 3 -->
+  <article class="sheet" id="wing">
+    <div class="sheet-head">
+      <span class="no">Project 03</span>
+      <h2>Flow Control Wing for UAV Applications</h2>
+      <div class="meta"><span class="org">National Institute for Aerospace Technology (INTA), Madrid</span><span class="dates">Oct 2025 – Jun 2026</span></div>
+      <div class="rolebar"><span class="role">Aerodynamics Intern · Bachelor's thesis</span><span class="stamp">Designed · Built · Tested</span></div>
+    </div>
+    <p>I joined INTA as an intern and did my bachelor's thesis on the same project: controlling the flow over a UAV wing at low Reynolds number with pulsed air jets from three leading edge slots, tuned by an optimiser in the wind tunnel.</p>
+    <h3 class="sub">My contribution</h3>
+    <ul class="contrib">
+      <li><b>Design:</b> I designed the NACA 0018 finite wing in Solid Edge and drew it for manufacture (<a href="#drawing">appendix</a>), fitting the internal channels so that each slot blows tangentially with the same pressure loss. I also ran its baseline polars in XFLR5.</li>
+      <li><b>Build:</b> The wing was printed in ABS-like resin. With a PhD researcher I set up the pneumatic chain, from the air line and flow meter to the valve manifold, and the control electronics that drive the valves from the PC.</li>
+      <li><b>Testing:</b> The first campaign used a Scanivalve, whose data was not repeatable, and then a hot wire, which was too slow, and its genetic algorithm lowered J<sub>1</sub>, the drag over the baseline drag, by adding momentum rather than cleaning up the wake. For the final campaign we moved to PIV with a second objective, J<sub>2</sub>, that penalises any departure of the wake from the freestream. I proposed a multi-objective Bayesian optimiser, and together we wrote the Python routine that runs each test in the same order, from the valves to the laser, camera and PIV processing.</li>
+    </ul>
+    <h3 class="sub">Result</h3>
+    <p>Each test dropped from more than 10 minutes to 3, so the 329 laws of the campaign took 3 days. The best one brought the wake profile 74% closer to the freestream while injecting only a third of the momentum of steady blowing.</p>
+    <div class="figs">
+      <figure>
+        <div class="plate"><img src="img/inta_cad.png" alt="Mounting base and wing assembly in Solid Edge with the internal air channels" width="805" height="1105" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 6</span>Mounting base and wing assembly in Solid Edge, showing the internal air channels.</figcaption>
+      </figure>
+      <figure>
+        <div class="plate"><img src="img/inta_tunnel.jpg" alt="The wing model in the wind tunnel lit by the PIV laser sheet" width="1346" height="1400" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 7</span>The model in the wind tunnel during a PIV run.</figcaption>
+      </figure>
+      <figure class="full">
+        <div class="plate"><img src="img/inta_wake.png" alt="Wake profiles of five actuation laws along the Pareto front" width="3000" height="737" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 8</span>Wake profiles of five actuation laws along the Pareto front of the two objectives, from best J<sub>1</sub> to best J<sub>2</sub> (dashed: wing without actuation).</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 4 -->
+  <article class="sheet" id="jet">
+    <div class="sheet-head">
+      <span class="no">Project 04</span>
+      <h2>Business Jet Conceptual and Preliminary Design</h2>
+      <div class="meta"><span class="org">Georgia Tech, Atlanta</span><span class="dates">Jan 2025 – Apr 2025</span></div>
+      <div class="rolebar"><span class="role">Individual capstone project</span><span class="stamp">Designed</span></div>
+    </div>
+    <p>Design of an ultra-premium business jet, from its mission requirements and a Pugh matrix of five configurations to a complete final design. I covered weight, cost and constraint sizing, aerofoil selection with XFLR5, a wing study in AVL coupled to a MATLAB genetic algorithm to minimise induced drag, fuselage, cabin and tail sizing, and the weight and balance with its CG envelope.</p>
+    <div class="figs">
+      <figure class="full">
+        <div class="plate"><img src="img/jet_threeview.png" alt="Top, side and front views of the final business jet design" width="1888" height="613" loading="lazy"></div>
+        <figcaption><span class="fig">Fig. 9</span>Final design: top, side and front views.</figcaption>
+      </figure>
+    </div>
+  </article>
+
+  <!-- 5 -->
+  <article class="sheet" id="sloshing">
+    <div class="sheet-head">
+      <span class="no">Project 05</span>
+      <h2>Propellant Sloshing in Rocket Tanks</h2>
+      <div class="meta"><span class="org">LGST Lab, Georgia Tech, Atlanta</span><span class="dates">Jan 2025 – May 2025</span></div>
+      <div class="rolebar"><span class="role">Undergraduate Research Assistant</span><span class="stamp">Tested</span></div>
+    </div>
+    <p>Experimental and analytical study of propellant sloshing in tanks of different geometries. I extracted the sloshing eigenfrequencies of each tank experimentally, tracking the edge of the free surface in MATLAB and applying a Fourier transform to the resulting signal. I also worked on analytical models linking pressure measurements at the bottom of the tank to the displacement of the first mode spring–mass model, as the basis for a Lyapunov-based control system to improve rocket stability.</p>
+  </article>
+
+  <!-- Appendix -->
+  <article class="sheet" id="drawing">
+    <div class="sheet-head">
+      <span class="no">Appendix</span>
+      <h2>Manufacturing Drawing of the INTA Wing Model</h2>
+    </div>
+    <figure class="drawing" id="drawing-fig">
+      <div class="plate"><img src="img/inta_drawing_full.png" alt="Manufacturing drawing of the slotted wing model with sections, detail views and the coordinate table" width="3509" height="2480" loading="lazy"></div>
+      <button type="button" class="zoom-btn" id="zoom-btn" aria-pressed="false">Zoom in</button>
+    </figure>
+  </article>
+
+  <footer>
+    <span>Guillermo Royo López-Fando · Project Portfolio</span>
+    <span>October 2026</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var fig = document.getElementById('drawing-fig');
+  var btn = document.getElementById('zoom-btn');
+  if (!fig || !btn) return;
+  btn.addEventListener('click', function () {
+    var on = fig.classList.toggle('zoomed');
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.textContent = on ? 'Zoom out' : 'Zoom in';
+  });
+})();
+</script>
+</body>
+</html>
